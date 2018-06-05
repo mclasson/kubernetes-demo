@@ -12,3 +12,4 @@ Perform the prerequisites first!
 3. Init azds for the project by running ``` azds prep --public. Public is to enable public http for that service. A number of files is now added to the folder like DockerFile and azds.yaml.
 4. Now just run ``` azds up ``` to build, publish and launch the app in the cluster. You are presented with two urls in the console window. One for the public address to the service and one SSL'd to a localhost address.
 5. In VS Code hit Ctrl+Shift+P to open Command Palette and start typing ``` Azure Dev ``` . You should now see Prepare configuration files for Azure Dev Spaces. Run the command.
+![images](images/commandpalette.png)
