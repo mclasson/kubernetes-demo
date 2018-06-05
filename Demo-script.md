@@ -11,5 +11,10 @@ Perform the prerequisites first!
 2. cd into the new folder and run ``` code . ``` to open VS Code.
 3. Init azds for the project by running ``` azds prep --public. Public is to enable public http for that service. A number of files is now added to the folder like DockerFile and azds.yaml.
 4. Now just run ``` azds up ``` to build, publish and launch the app in the cluster. You are presented with two urls in the console window. One for the public address to the service and one SSL'd to a localhost address.
-5. In VS Code hit Ctrl+Shift+P to open Command Palette and start typing ``` Azure Dev ``` . You should now see Prepare configuration files for Azure Dev Spaces. Run the command.
+
+## DEBUG
+1. In VS Code hit Ctrl+Shift+P to open Command Palette and start typing ``` Azure Dev ``` . You should now see Prepare configuration files for Azure Dev Spaces. Run the command.
 ![images](images/commandpalette.png)
+2. In debug pane you should now have a configuration called ".NET Core Launch (AZDS)". If not, restart VS Code.
+3. With that configuration active, hit F5. Problems? Restart VS Code. It's a first time kind of thing.
+4. Add a breakpoint in your code and browse to the site.
