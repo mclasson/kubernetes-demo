@@ -19,6 +19,35 @@ Perform the prerequisites first!
 3. With that configuration active, hit F5. Problems? Restart VS Code. It's a first time kind of thing.
 4. Add a breakpoint in your code and browse to the site.
 
+## INTERESTING
+Now create a second service as a webapi by doing the following
+1. Run ``` dotnet new webapi --name backend ```
+2. cd into the folder _backend_ and run ``` code . ```
+3. Init azds for the project by running ``` azds prep  ```. Notice the lack of ``` --public ```? This is because the backend should be exposed to the public.
+4. Either you get a notification that Dev-Spaces is missing some files and you click _Yes_ or you press Shift+Ctrl+P and type ``` Azure Dev ``` like above to create the profile for debugging.
+5. Now, modify the first project _frontend_ in the controller for, like, _About_ to the following
+```cs
+        public async Task<IActionResult> About()
+        {
+            ViewData["Message"] = "Your application description page.";
+            using (var client = new System.Net.Http.HttpClient())
+            {
+                // Call *mywebapi*, and display its response in the page
+                var request = new System.Net.Http.HttpRequestMessage();
+                request.RequestUri = new Uri("http://backend/api/values/1");
+                if (this.Request.Headers.ContainsKey("azds-route-as"))
+                {
+                    // Propagate the dev space routing header
+                    request.Headers.Add("azds-route-as", this.Request.Headers["azds-route-as"] as IEnumerable<string>);
+                }
+                var response = await client.SendAsync(request);
+                ViewData["Message"] += " and " + await response.Content.ReadAsStringAsync();
+            }
+            return View();
+        }
+ ```
+ Now you can put a breakpoint in both VS Code windows and play back and forth. However, see below....
+ 
 ## PROBLEMS
 Seems like dotnet 2.1 is a problem when you want to debug a service and at the same time accessing another service (or even debug both at the same time). The workaround is to install 2.0 by running ```  choco install dotnetcore-sdk --version 2.0.3 ```
 At a first glance the error is because 2.1 in dev-spaces does not emit the header "azds-route-as"
