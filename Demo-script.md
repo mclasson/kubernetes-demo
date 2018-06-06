@@ -51,3 +51,12 @@ Now create a second service as a webapi by doing the following
 ## PROBLEMS
 Seems like dotnet 2.1 is a problem when you want to debug a service and at the same time accessing another service (or even debug both at the same time). The workaround is to install 2.0 by running ```  choco install dotnetcore-sdk --version 2.0.3 ```
 At a first glance the error is because 2.1 in dev-spaces does not emit the header "azds-route-as"
+Then, in the folder where you run the dotnet command, add a file called global.json with this content:
+```json
+{
+  "sdk": {
+    "version": "2.0.3"
+  }
+}
+```
+
