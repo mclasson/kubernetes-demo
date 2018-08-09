@@ -9,5 +9,5 @@ A few demos for Kubernetes. Run the prerequisites.bat beforehand just to cache i
 In addition:
 - Download and install Visual Studio Code (https://go.microsoft.com/fwlink/?Linkid=852157)
 - Download and install the latest version of Azure CLI (https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
-- Download the latest version of dev-spaces (https://aka.ms/get-azds-code)
+
 - In a cmd prompt run ``` code --install-extension <path-to-downloaded-azds> ```
